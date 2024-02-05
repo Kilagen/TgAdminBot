@@ -11,7 +11,7 @@ async def main():
     consumer = Consumer(dispatcher, bot)
 
     ban_commander.add_to(consumer)
-    
+
     await consumer.set_my_commands()
     await dispatcher.start_polling(bot)
 

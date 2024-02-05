@@ -7,7 +7,8 @@ class IsAdmin(filters.BaseFilter):
     """
     async def __call__(self, message: types.Message) -> bool:
         admins = await message.chat.get_administrators()
-        return message.from_user in admins
+        admin_ids = [admin.user.id for admin in admins]
+        return message.from_user.id in admin_ids
 
 
 class HasSpamBan(filters.BaseFilter):

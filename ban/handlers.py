@@ -14,7 +14,7 @@ ban_commands = [
 ban_commander = Commander(commands=ban_commands, router=ban_router)
 
 
-@ban_router.message(filters.Command("ban", ignore_mention=True), IsAdmin(), filters.command.Pattern("/ban"))
+@ban_router.message(filters.Command("ban", ignore_mention=True), IsAdmin())
 async def ban_user(msg: types.Message):
     chat = msg.chat
     ban_message = msg.reply_to_message
