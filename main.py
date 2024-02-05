@@ -9,7 +9,10 @@ async def main():
     bot = Bot(token=BOT_TOKEN)
     dispatcher = Dispatcher()
     consumer = Consumer(dispatcher, bot)
+
     ban_commander.add_to(consumer)
+    
+    await consumer.set_my_commands()
     await dispatcher.start_polling(bot)
 
 
