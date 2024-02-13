@@ -1,5 +1,5 @@
 from aiogram import types, filters, Router
-from util.filters import IsAdmin
+from util.filters import IsSentByAdmin
 from util import Commander
 from config import FORWARD_SPAM_CHAT_ID
 
@@ -14,7 +14,7 @@ ban_commands = [
 ban_commander = Commander(commands=ban_commands, router=ban_router)
 
 
-@ban_router.message(filters.Command("ban", ignore_mention=True), IsAdmin())
+@ban_router.message(filters.Command("ban", ignore_mention=True), IsSentByAdmin())
 async def ban_user(msg: types.Message):
     chat = msg.chat
     ban_message = msg.reply_to_message
@@ -24,7 +24,7 @@ async def ban_user(msg: types.Message):
     await ban_chat_member
 
 
-@ban_router.message(filters.Command("banspam"), IsAdmin())
+@ban_router.message(filters.Command("banspam"), IsSentByAdmin())
 async def ban_user_for_spam(msg: types.Message):
     ban_message = msg.reply_to_message
     await ban_message.forward(FORWARD_SPAM_CHAT_ID)

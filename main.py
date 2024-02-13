@@ -1,6 +1,7 @@
 import asyncio
 from aiogram import Bot, Dispatcher
 from ban import ban_commander
+from user_info import stats_commander
 from config import BOT_TOKEN
 from util import Consumer
 
@@ -11,6 +12,7 @@ async def main():
     consumer = Consumer(dispatcher, bot)
 
     ban_commander.add_to(consumer)
+    stats_commander.add_to(consumer)
 
     await consumer.set_my_commands()
     await dispatcher.start_polling(bot)

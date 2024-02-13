@@ -1,7 +1,7 @@
 from aiogram import types, filters
 
 
-class IsAdmin(filters.BaseFilter):
+class IsSentByAdmin(filters.BaseFilter):
     """
     Checks if the message sender is a chat admin
     """
@@ -29,4 +29,4 @@ class HasBan(filters.BaseFilter):
         raise NotImplementedError
 
 
-__all__ = ["IsAdmin"]
+__all__ = ["IsSentByAdmin"]
