@@ -1,20 +1,25 @@
 import asyncio
 from aiogram import Bot, Dispatcher
-from ban import ban_commander
-from user_info import stats_commander
 from config import BOT_TOKEN
-from util import Consumer
+from handlers import (
+admin_router,
+command_router,
+dm_router,
+group_router
+)
+from storage import SqliteStorage
+
+ROUTERS = [admin_router, command_router, dm_router, group_router]
+print("Before storage...")
+STORAGE = SqliteStorage()
+print("After storage...")
 
 
 async def main():
     bot = Bot(token=BOT_TOKEN)
-    dispatcher = Dispatcher()
-    consumer = Consumer(dispatcher, bot)
-
-    ban_commander.add_to(consumer)
-    stats_commander.add_to(consumer)
-
-    await consumer.set_my_commands()
+    dispatcher = Dispatcher(storage=STORAGE)
+    dispatcher.include_routers(*ROUTERS)
+    print("Before polling...")
     await dispatcher.start_polling(bot)
 
 
