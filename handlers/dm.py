@@ -9,7 +9,11 @@ from config import config, ChatData, config_to_file
 
 class GeneralAdminFilter(BaseFilter):
     async def __call__(self, message: types.Message) -> bool:
-        return message.from_user.id in config.general_admins
+        return (
+                message.from_user.id in config.general_admins
+                and
+                message.chat.id == message.from_user.id
+        )
 
 
 dm_router = Router()
