@@ -34,7 +34,7 @@ async def message_handler(message: types.Message) -> None:
     forward_url = forward.get_url()
     await message.delete()
     await message.answer(
-        f"{TextMention(message.from_user).as_html()} restricted. {TextLink("Reason", url=forward_url).as_html()}"
+        f"{TextMention(user=message.from_user).as_html()} restricted. {TextLink("Reason", url=forward_url).as_html()}"
     )
 
     bad_user = message.from_user
