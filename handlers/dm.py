@@ -1,18 +1,23 @@
+import logging
 import json
 from dataclasses import asdict
 
-from aiogram import F, Router, types
+from aiogram import Router, types
 from aiogram.filters import BaseFilter
 
 from config import config, ChatData, config_to_file
 
 
 class GeneralAdminFilter(BaseFilter):
+    def __init__(self):
+        super().__init__()
+
     async def __call__(self, message: types.Message) -> bool:
+        logging.debug(f"Check User {message.from_user} is admin")
         return (
-                message.from_user.id in config.general_admins
-                and
                 message.chat.id == message.from_user.id
+                and
+                message.from_user.id in config.general_admins
         )
 
 
@@ -83,6 +88,7 @@ async def getChat(data: str) -> str:
 
 @dm_router.message(GeneralAdminFilter())
 async def handleAdminMessage(message: types.Message):
+    logging.info("Received admin message")
     command, *data = message.text.splitlines()
     data = '\n'.join(data)
     if command.startswith('addChat'):

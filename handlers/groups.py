@@ -1,4 +1,5 @@
 import datetime
+import logging
 
 from aiogram.filters import BaseFilter
 from aiogram import Router, types
@@ -13,14 +14,17 @@ detector.set_next(LogRegDetector())
 
 
 class ChatIsWatchedFilter(BaseFilter):
+    def __init__(self):
+        super().__init__()
+
     async def __call__(self, message: types.Message) -> bool:
-        print(message)
-        return any(message.chat.id == chat.id for chat in config.chats)
+        logging.debug(f"Check Chat {message.chat.id} Is Watched")
+        return any(message.chat.id == -chat.id for chat in config.chats)
 
 
 @group_router.message(ChatIsWatchedFilter())
 async def message_handler(message: types.Message) -> None:
-    print(message)
+    logging.debug("Received chat message")
     forward_chat_id = next(chat.redirect_to for chat in config.chats if chat.id == message.chat.id)
     is_spam = await detector(message.text)
     if not is_spam:
