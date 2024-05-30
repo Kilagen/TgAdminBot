@@ -14,6 +14,7 @@ detector.set_next(LogRegDetector())
 
 class ChatIsWatchedFilter(BaseFilter):
     async def __call__(self, message: types.Message) -> bool:
+        print(message)
         return any(message.chat.id == chat.id for chat in config.chats)
 
 
