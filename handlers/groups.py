@@ -19,7 +19,7 @@ class ChatIsWatchedFilter(BaseFilter):
 
     async def __call__(self, message: types.Message) -> bool:
         logging.debug(f"Check Chat {message.chat.id} Is Watched")
-        return any(message.chat.id == -chat.id for chat in config.chats)
+        return any(message.chat.id == chat.id for chat in config.chats)
 
 
 @group_router.message(ChatIsWatchedFilter())
