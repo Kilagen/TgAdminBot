@@ -1,6 +1,7 @@
 import json
 from dataclasses import asdict
 
+from aiogram.methods.send_message import SendMessage
 from aiogram import F, Router, types
 from aiogram.filters import BaseFilter
 
