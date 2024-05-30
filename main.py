@@ -3,10 +3,11 @@ from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN
 from handlers import (
     dm_router,
-    group_router
+    group_router,
+    default_router
 )
 
-ROUTERS = [dm_router, group_router]
+ROUTERS = [dm_router, group_router, default_router]
 
 
 async def main():
