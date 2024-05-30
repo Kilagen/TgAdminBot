@@ -30,7 +30,7 @@ async def message_handler(message: types.Message) -> None:
     if not is_spam:
         return
 
-    forward = await message.forward(forward_chat_id)
+    forward = await message.forward(int('-200' + str(forward_chat_id)))
     forward_url = forward.get_url()
     await message.delete()
     await message.answer(
