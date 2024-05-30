@@ -8,7 +8,7 @@ class LogRegDetector(BaseSpamDetector):
         self.model = load('spam_detection/models/logreg.model')
         self.vectorizer = load('spam_detection/models/logreg.vectorizer')
 
-    async def _validate(self, text: str) -> bool:
+    def validate(self, text: str) -> bool:
         if text is None:
             return False
         text = text.lower()
