@@ -25,7 +25,7 @@ class ChatIsWatchedFilter(BaseFilter):
 @group_router.message(ChatIsWatchedFilter())
 async def message_handler(message: types.Message) -> None:
     logging.debug("Received chat message")
-    forward_chat_id = next(chat.redirect_to for chat in config.chats if chat.id == message.chat.id)
+    forward_chat_id = -next(chat.redirect_to for chat in config.chats if chat.id == message.chat.id)
     is_spam = await detector(message.text)
     if not is_spam:
         return
