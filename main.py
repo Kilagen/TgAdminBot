@@ -1,7 +1,7 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
-from config import BOT_TOKEN
+from config.bot import BOT_TOKEN
 from handlers import (
     dm_router,
     group_router,
@@ -11,7 +11,7 @@ ROUTERS = [dm_router, group_router, default_router]
 
 
 async def main():
-    bot = Bot(token=BOT_TOKEN)
+    bot = Bot(token=BOT_TOKEN, parse_mode='html')
     dispatcher = Dispatcher()
     dispatcher.include_routers(*ROUTERS)
     logging.info("begin polling")

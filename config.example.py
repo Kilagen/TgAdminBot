@@ -18,7 +18,7 @@ class Config:
     chats: tp.List[ChatData]
 
 
-def file_to_config(path='config.json') -> Config:
+def file_to_config(path='chats_config.json') -> Config:
     config_data = json.load(open(path, 'r'))
     general_admins = config_data['general_admins']
     chats = config_data['chats']
@@ -28,7 +28,7 @@ def file_to_config(path='config.json') -> Config:
     return config
 
 
-def config_to_file(config: Config, path='config.json') -> None:
+def config_to_file(config: Config, path='chats_config.json') -> None:
     mapping = {
         'general_admins': config.general_admins,
         'chats': [{'id': chat.id, 'redirect_to': chat.redirect_to, 'admins': chat.admins} for chat in config.chats]
